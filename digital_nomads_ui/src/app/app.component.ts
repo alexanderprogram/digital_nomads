@@ -14,5 +14,5 @@ import { CommonModule } from '@angular/common';
 })
 export class AppComponent {
   title = 'digital_nomads_ui';
-  isLoggedIn: boolean = true; // true for now
+  isLoggedIn: boolean = true;
 }

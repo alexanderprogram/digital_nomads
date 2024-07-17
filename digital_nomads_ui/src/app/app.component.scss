@@ -2,18 +2,15 @@
 
 :host {
   display: block;
-  padding: 10px;
+  height: 100vh;
+  overflow: hidden;
+  margin: 0;
 }
 
 .app-container {
   display: flex;
   flex-direction: column;
-  height: calc(100vh - 20px); 
-  border: 1px solid #ccc; 
-}
-
-app-top-bar {
-  border-bottom: 1px solid #ccc;
+  height: 100%;
 }
 
 .main-content {
@@ -22,19 +19,7 @@ app-top-bar {
   overflow: hidden;
 }
 
-app-sidebar {
-  border-right: 1px solid #ccc; 
-  overflow-y: auto; 
-}
-
 .content-area {
   flex: 1;
-  padding: 15px;
-  overflow-y: auto; 
-}
-
-app-auth {
-  display: block;
-  height: calc(100vh - 20px);
-  border: 1px solid #ccc; 
+  overflow-y: auto;
 }
