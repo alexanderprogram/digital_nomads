@@ -10,6 +10,5 @@ export class MainContentComponent {}
 
 export const routes: Routes = [
   { path: 'auth', component: AuthComponent },
-  { path: 'main', component: MainContentComponent },
-  { path: '', redirectTo: '/main', pathMatch: 'full' },
+  { path: '', component: MainContentComponent },
 ];

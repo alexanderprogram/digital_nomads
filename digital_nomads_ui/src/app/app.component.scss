@@ -3,6 +3,7 @@
 :host {
   display: block;
   height: 100vh;
+  width: 100vw;
   overflow: hidden;
   margin: 0;
 }
@@ -13,10 +14,18 @@
   height: 100%;
 }
 
+app-top-bar {
+  height: 8vh;
+}
+
 .main-content {
   display: flex;
   flex: 1;
   overflow: hidden;
+}
+
+app-sidebar {
+  width: 16%; 
 }
 
 .content-area {
