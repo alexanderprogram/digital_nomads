@@ -1,4 +1,62 @@
+.top-bar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  height: 100%;
+}
+
 :host {
   border-bottom: 2px solid #ccc;
   margin-right: 40px;
+}
+.website-name {
+  font-size: 1.5em;
+  font-weight: bold;
+}
+
+.user-section {
+  position: relative;
+}
+
+.user-image {
+  cursor: pointer;
+  
+  img {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+  }
+}
+
+.user-menu {
+  position: absolute;
+  top: 100%;
+  right: 0;
+  padding: 10px;
+
+  .user-info {
+    display: flex;
+    align-items: center;
+    margin-bottom: 10px;
+
+    img {
+      width: 50px;
+      height: 50px;
+      border-radius: 50%;
+      margin-right: 10px;
+    }
+  }
+
+  button {
+    width: 100%;
+    padding: 5px;
+    background-color: #f0f0f0;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+
+    &:hover {
+      background-color: #e0e0e0;
+    }
+  }
 }

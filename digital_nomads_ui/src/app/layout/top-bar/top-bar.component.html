@@ -1,1 +1,18 @@
-<p>top-bar works!</p>
+<div class="top-bar">
+  <div class="website-name">{{ websiteName }}</div>
+  <div class="user-section" *ngIf="!fetchError; else errorMessage">
+    <div class="user-image" (click)="toggleUserMenu()" *ngIf="user">
+      <img [src]="user.imageUrl" alt="User profile" />
+    </div>
+    <div class="user-menu" *ngIf="isUserMenuOpen">
+      <div class="user-info">
+        <img [src]="user?.imageUrl" alt="User profile" />
+        <span>{{ user?.name }}</span>
+      </div>
+      <button (click)="logout()">Logout</button>
+    </div>
+  </div>
+  <ng-template #errorMessage>
+    <div class="error-message">{{ fetchError }}</div>
+  </ng-template>
+</div>
