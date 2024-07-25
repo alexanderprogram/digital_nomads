@@ -22,5 +22,5 @@ import { MainContentComponent } from './layout/main-content/main-content.compone
 })
 export class AppComponent {
   title = 'digital_nomads_ui';
-  isLoggedIn: boolean = true;
+  isLoggedIn: boolean = false;
 }
