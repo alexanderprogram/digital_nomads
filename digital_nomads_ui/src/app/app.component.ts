@@ -23,4 +23,12 @@ import { MainContentComponent } from './layout/main-content/main-content.compone
 export class AppComponent {
   title = 'digital_nomads_ui';
   isLoggedIn: boolean = false;
+
+  onLoginSuccess() {
+    this.isLoggedIn = true;
+  }
+
+  logout() {
+    this.isLoggedIn = false;
+  }
 }

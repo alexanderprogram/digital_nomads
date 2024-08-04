@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { HttpClient } from '@angular/common/http';
 import { catchError, of } from 'rxjs';
@@ -16,6 +16,8 @@ interface User {
   styleUrl: './top-bar.component.scss'
 })
 export class TopBarComponent implements OnInit {
+  @Output() logoutEvent = new EventEmitter<void>();
+
   websiteName = 'Digital_Nomad';
   user: User | null = null;
   fetchError: string | null = null;
@@ -28,7 +30,7 @@ export class TopBarComponent implements OnInit {
   }
 
   fetchUserData() {
-    this.http.get<User>('https://api.todo.com/user')
+    this.http.get<User>('http://localhost:8080/api/user')
       .pipe(
         catchError(error => {
           console.error('Error fetching user data:', error);
@@ -46,6 +48,8 @@ export class TopBarComponent implements OnInit {
   }
 
   logout() {
-    console.log('Logout functionality not yet implemented');
+    this.logoutEvent.emit();
+    this.user = null;
+    this.isUserMenuOpen = false;
   }
 }

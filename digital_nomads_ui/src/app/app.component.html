@@ -1,5 +1,5 @@
 <div class="app-container" *ngIf="isLoggedIn; else auth">
-  <app-top-bar></app-top-bar>
+  <app-top-bar (logout)="logout()"></app-top-bar>
   <div class="main-content">
     <app-sidebar></app-sidebar>
     <div class="content-area">
@@ -8,5 +8,5 @@
   </div>
 </div>
 <ng-template #auth>
-  <app-auth></app-auth>
+  <app-auth (loginSuccess)="onLoginSuccess()"></app-auth>
 </ng-template>

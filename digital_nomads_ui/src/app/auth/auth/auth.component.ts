@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, Output, EventEmitter } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { HttpClient } from '@angular/common/http';
@@ -11,6 +11,8 @@ import { HttpClient } from '@angular/common/http';
   styleUrls: ['./auth.component.scss']
 })
 export class AuthComponent {
+  @Output() loginSuccess = new EventEmitter<void>();
+  
   isLoginMode = true;
   email: string = '';
   password: string = '';
@@ -31,15 +33,42 @@ export class AuthComponent {
     if (this.isLoginMode) {
       this.login();
     } else {
-      if (!this.validatePassword()) {
-        return;
-      }
       if (this.password !== this.confirmPassword) {
         this.error = 'Passwords do not match';
         return;
       }
       this.signUp();
     }
+  }
+
+  login() {
+    this.http.post('http://localhost:8080/api/auth/login', { email: this.email, password: this.password })
+      .subscribe({ 
+        next: (response: any) => {
+          console.log('Login successful', response);
+          this.error = '';
+          this.loginSuccess.emit(); 
+        },
+        error: (error) => {
+          console.error('Login failed', error);
+          this.error = 'Login failed. Please check your credentials.';
+        }
+      });
+  }
+
+  signUp() {
+    this.http.post('http://localhost:8080/api/auth/signup', { email: this.email, password: this.password })
+      .subscribe({
+        next: (response: any) => {
+          console.log('Signup successful', response);
+          this.isLoginMode = true;
+          this.error = 'Signup successful. Please login.';
+        },
+        error: (error) => {
+          console.error('Signup failed', error);
+          this.error = 'Signup failed. Please try again.';
+        }
+      });
   }
 
   validatePassword(): boolean {
@@ -51,38 +80,6 @@ export class AuthComponent {
     return true;
   }
 
-  login() {
-    if (!this.validateEmail()) {
-      return;
-    }
-    this.http.post('http://localhost:8080/api/auth/login', { email: this.email, password: this.password })
-      .subscribe({
-        next: (response: any) => {
-          console.log('Login successful', response);
-        },
-        error: (error) => {
-          console.error('Login failed', error);
-          this.error = 'Login failed. Please check your credentials.';
-        }
-      });
-  }
-
-  signUp() {
-    if (!this.validateEmail()) {
-      return;
-    }
-    this.http.post('http://localhost:8080/api/auth/signup', { email: this.email, password: this.password })
-      .subscribe({
-        next: (response: any) => {
-          console.log('Signup successful', response);
-          this.isLoginMode = true;
-        },
-        error: (error) => {
-          console.error('Signup failed', error);
-          this.error = 'Signup failed. Please try again.';
-        }
-      });
-  }
 
   validateEmail(): boolean {
     const emailRegex = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/;
@@ -92,4 +89,5 @@ export class AuthComponent {
     }
     return true;
   }
+
 }
